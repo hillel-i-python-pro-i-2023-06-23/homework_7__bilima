@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import TypeAlias, TypedDict, List, Dict, Any
+from typing import TypeAlias, TypedDict
 import random
 from faker import Faker
 
 T_GROUP_NAME: TypeAlias = str
-T_GROUP_NAMES: TypeAlias = List[T_GROUP_NAME]
+T_GROUP_NAMES: TypeAlias = list[T_GROUP_NAME]
 
 
 class Human(TypedDict):
@@ -12,7 +12,7 @@ class Human(TypedDict):
     group: T_GROUP_NAME
 
 
-T_HUMANS: TypeAlias = List[Human]
+T_HUMANS: TypeAlias = list[Human]
 
 
 @dataclass
@@ -31,9 +31,7 @@ class DataProvider:
             group=group_name,
         )
 
-    def _generate_humans(
-        self, groups: T_GROUP_NAMES, amount_of_humans: int
-    ) -> T_HUMANS:
+    def _generate_humans(self, groups: T_GROUP_NAMES, amount_of_humans: int) -> T_HUMANS:
         members = []
         for _ in range(amount_of_humans):
             group_name = random.choice(groups)
@@ -52,4 +50,3 @@ class DataProvider:
 
         _groups = self._generate_group_names(amount=amount_of_groups)
         return self._generate_humans(groups=_groups, amount_of_humans=amount_of_humans)
-
